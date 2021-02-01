@@ -20,7 +20,7 @@
       </Description>
     </Property>
 
-    <Property name="RDP.Security.TLS.Version" value="TLS1.1">
+    <Property name="RDP.Security.TLS.Version" value="TLS1.2">
       <Choice>TLS1.0, TLS1.1, TLS1.2</Choice>
       <Description>
         The TLS version server supports: TLS1.0, TLS1.1, or TLS1.2
