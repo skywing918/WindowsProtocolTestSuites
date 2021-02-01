@@ -1,7 +1,7 @@
-pool:
-  vmImage: windows-2019
 jobs:
   - job:
+    pool:
+      vmImage: windows-2019
     displayName: Build Test Suite
     workspace:
       clean: true
@@ -37,6 +37,8 @@ jobs:
         condition: succeededOrFailed()
 
   - job:
+    pool:
+      vmImage: windows-2019
     displayName: Check email and Header
     workspace:
       clean: true
@@ -62,6 +64,8 @@ jobs:
           arguments: '-TestSuitePath $(Build.Repository.LocalPath) -IsCheckAll "$(test.IsCheckAllFilesLicenseHeader)" -targetBranch "$(system.pullRequest.targetBranch)" -sourceBranch "$(system.pullRequest.sourceBranch)" '
 
   - job:
+    pool:
+      vmImage: windows-2019
     displayName: Build RDP SUT Control Agents
     workspace:
       clean: true
