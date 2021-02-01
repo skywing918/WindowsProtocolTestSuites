@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft. All rights reserved.
+# Licensed under the MIT license. See LICENSE file in the project root for full license information.
 param (
     [string]$TestSuitePath,
     [string]$IsCheckAll = "false",
@@ -6,15 +8,22 @@ param (
 )
 
 $InvocationPath = Split-Path $MyInvocation.MyCommand.Definition -parent
+if($targetBranch -notmatch "refs/heads/(.+)")
+{
+    $targetBranch = "origin/$targetBranch"
+}
+if($sourceBranch -notmatch "refs/heads/(.+)")
+{
+    $sourceBranch = "origin/$sourceBranch"
+}
+
 Write-Host "InvocationPath: $InvocationPath"
 Write-Host "TestSuitePath:$TestSuitePath"
 Write-Host "targetBranch:$targetBranch"
 Write-Host "sourceBranch:$sourceBranch"
 
-git branch -a
-
 Push-Location $TestSuitePath
-$Diff = git diff --name-only "remotes/origin/$targetBranch...remotes/origin/$sourceBranch"
+$Diff = git diff --name-only "$targetBranch...$sourceBranch"
 Pop-Location
 
 $extension = ".ps1",".cs",".bat",".cmd",".reg",".sh",".psm1"
