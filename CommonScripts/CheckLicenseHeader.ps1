@@ -6,6 +6,11 @@ param (
 )
 
 $InvocationPath = Split-Path $MyInvocation.MyCommand.Definition -parent
+if($targetBranch -notmatch "refs/heads/(.+)")
+{
+    $targetBranch = "origin/$targetBranch"
+}
+
 Write-Host "InvocationPath: $InvocationPath"
 Write-Host "TestSuitePath:$TestSuitePath"
 Write-Host "targetBranch:$targetBranch"
