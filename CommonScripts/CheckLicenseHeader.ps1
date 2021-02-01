@@ -6,18 +6,13 @@ param (
 )
 
 $InvocationPath = Split-Path $MyInvocation.MyCommand.Definition -parent
-if($targetBranch -notmatch "refs/heads/(.+)")
-{
-    $targetBranch = "origin/$targetBranch"
-}
-
 Write-Host "InvocationPath: $InvocationPath"
 Write-Host "TestSuitePath:$TestSuitePath"
 Write-Host "targetBranch:$targetBranch"
 Write-Host "sourceBranch:$sourceBranch"
 
 Push-Location $TestSuitePath
-$Diff = git diff --name-only "$targetBranch...$sourceBranch"
+$Diff = git diff --name-status "$targetBranch..$sourceBranch"
 Pop-Location
 
 $extension = ".ps1",".cs",".bat",".cmd",".reg",".sh",".psm1"
