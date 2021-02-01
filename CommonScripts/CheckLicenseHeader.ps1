@@ -14,7 +14,7 @@ Write-Host "sourceBranch:$sourceBranch"
 git branch -a
 
 Push-Location $TestSuitePath
-$Diff = git diff --name-only "$targetBranch...$sourceBranch"
+$Diff = git diff --name-only "remotes/origin/$targetBranch...remotes/origin/$sourceBranch"
 Pop-Location
 
 $extension = ".ps1",".cs",".bat",".cmd",".reg",".sh",".psm1"
