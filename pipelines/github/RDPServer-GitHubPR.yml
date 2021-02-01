@@ -33,5 +33,5 @@ variables:
   - group: Build Variables
   - group: External Repo Variables
 
-stages:
+jobs:
   - template: GitHubPR-PR.yml
